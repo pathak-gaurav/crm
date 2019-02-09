@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <title>Customer List</title>
+</head>
+<body>
+
+<div class="container">
+    <br>
+    <h3>Customer Data</h3>
+    <hr>
+    <br>
+    <input type="button" onclick="window.location.href='/showForm'" class="btn btn-primary btn-sm mb-3"
+           th:value="'Add Customer'"/>
+
+    <br>
+    <table class="table table-bordered table-dark">
+        <thead>
+        <tr>
+            <td>First Name</td>
+            <td>Last Name</td>
+            <td>Action</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="customer:${customers}">
+            <td th:text="${customer.firstName}"></td>
+            <td th:text="${customer.lastName}"></td>
+            <td>
+                <a th:href="@{/updateCustomer(customerId=${customer.customerId})}" class="btn btn-info">update</a>
+                <a th:href="@{/deleteCustomer(customerId=${customer.customerId})}" class="btn btn-warning" onclick="if(!(confirm('Are you sure you want to delete it?'))) return false">delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
